@@ -1,0 +1,20 @@
+{
+  "block.untitledtroll.yiorite_ore": "Yiorite Ore",
+  "block.untitledtroll.deepslate_yiorite_ore": "Deepslate Yiorite Ore",
+  "death.itemattack.yiorite.0": "%1$s could not handle the melting toxicity of the %2$s",
+  "death.itemattack.yiorite.0.player": "%1$s could not handle the melting toxicity of the %3$s",
+  "death.itemattack.yiorite.1": "%1$s was not brave enough to hold the enormous weight of %2$s's toxicity",
+  "death.itemattack.yiorite.1.player": "%1$s was not brave enough to hold both %3$s's toxicity and %2$s attacks",
+  "death.itemattack.yiorite.2": "%1$s has been punched to death by the %2$s",
+  "death.itemattack.yiorite.2.player": "%1$s has been punched to death by %2$s and the %3$s",
+  "death.itemattack.yiorite.3": "%2$s freedom didn't stopped where %1$s freedom started",
+  "death.itemattack.yiorite.3.player": "both %2$s and %3$s freedoms didn't stopped where %1$s freedom started",
+  "death.itemattack.yiorite.4": "%2$s spitted to hard on %1$s",
+  "death.itemattack.yiorite.4.player": "%3$s spitted to hard on %1$s while %2$s was fighting with him",
+  "speech.untitledtroll.yiorite.item": "§cHey, stop touching me!!!",
+  "speech.untitledtroll.yiorite.warning": "§5HEY YOU!! STOP LOOKING AT ME",
+  "speech.untitledtroll.yiorite.warning.spectator": "§5HEY YOU!! STOP LOOKING AT... AHH!! A GHOST",
+  "speech.untitledtroll.yiorite.stealing": "§9I told you not to look at me",
+  "speech.untitledtroll.yiorite.missed": "§crahhh, missed",
+  "speech.untitledtroll.yiorite.full": "§4Buuuurp... I'm full"
+}
