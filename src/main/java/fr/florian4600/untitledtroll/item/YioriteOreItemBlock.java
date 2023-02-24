@@ -31,16 +31,19 @@ public class YioriteOreItemBlock extends BlockItem {
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
 
-        if(world.isClient || entity.isInvulnerable()) return;
+        if(world.isClient || (entity.isLiving() && entity.isInvulnerable())) return;
 
         if(stack.getNbt() == null) stack.setNbt(new NbtCompound());
 
         String lastInvUUID = stack.getNbt().getString("lastUser");
         int tickSincePickedUp = (stack.getNbt().contains("InventoryTicks") && lastInvUUID == entity.getUuidAsString()) ? stack.getNbt().getInt("InventoryTicks") : 0;
 
-        if(entity.isPlayer() && !((PlayerEntity) entity).isCreative()) {
-            PlayerEntity player = (PlayerEntity) entity;
-            if (tickSincePickedUp >= 200) {
+        if(tickSincePickedUp >= 200) {
+            if(entity.isPlayer()) {
+                PlayerEntity player = (PlayerEntity) entity;
+
+                if(player.isCreative()) return;
+
                 player.sendMessage(Text.of("[§a" + stack.getName().getString() + "§r]:   " + MainClass.getStringTranslation("speech", "yiorite.item")), false);
 
                 Random random = new Random();
@@ -61,24 +64,23 @@ public class YioriteOreItemBlock extends BlockItem {
                     }
                 }
                 player.getInventory().setStack(slot, ItemStack.EMPTY);
+            }else if (entity.isLiving() && Iterables.contains(entity.getHandItems(), stack)) {
+
+                Random random = new Random();
+                int randomInt = random.nextInt(5);
+
+                if(randomInt == 4) {
+                    world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ENTITY_LLAMA_SPIT, SoundCategory.HOSTILE, 1.1f, 0.8f + (random.nextFloat() - random.nextFloat()) * 0.35F);
+                }
+
+                entity.damage(new UTItemDamageSource("yiorite."+randomInt, stack).setBypassesArmor(), 1.5f);
+
+                LivingEntity livingEntity = (LivingEntity) entity;
+
+                livingEntity.setStackInHand(Hand.MAIN_HAND, ItemStack.EMPTY);
+                livingEntity.setStackInHand(Hand.OFF_HAND, ItemStack.EMPTY);
             }
-        }else if (entity.isLiving() && Iterables.contains(entity.getHandItems(), stack)) {
-
-            Random random = new Random();
-            int randomInt = random.nextInt(5);
-
-            if(randomInt == 4) {
-                world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ENTITY_LLAMA_SPIT, SoundCategory.HOSTILE, 1.1f, 0.8f + (random.nextFloat() - random.nextFloat()) * 0.35F);
-            }
-
-            entity.damage(new UTItemDamageSource("yiorite."+randomInt, stack).setBypassesArmor(), 1.5f);
-
-            LivingEntity livingEntity = (LivingEntity) entity;
-
-            livingEntity.setStackInHand(Hand.MAIN_HAND, ItemStack.EMPTY);
-            livingEntity.setStackInHand(Hand.OFF_HAND, ItemStack.EMPTY);
         }
-
         stack.getNbt().putString("lastUser", entity.getUuidAsString());
         stack.getNbt().putInt("InventoryTicks", tickSincePickedUp+1);
     }
