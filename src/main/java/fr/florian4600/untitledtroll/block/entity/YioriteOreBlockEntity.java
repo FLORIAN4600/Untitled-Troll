@@ -2,6 +2,7 @@ package fr.florian4600.untitledtroll.block.entity;
 
 import fr.florian4600.untitledtroll.MainClass;
 import fr.florian4600.untitledtroll.block.YioriteOreBlock;
+import fr.florian4600.untitledtroll.utils.YioriteOreUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
@@ -92,15 +93,14 @@ public class YioriteOreBlockEntity extends BlockEntity {
             for(Map.Entry<String, Integer> target : blockEntity.targets.entrySet()) {
 
                 PlayerEntity player = world.getPlayerByUuid(UUID.fromString(target.getKey()));
+
+                if(player == null) return;
+
                 int lastStaringTicks = target.getValue();
 
                 switch (lastStaringTicks) {
                     case 15 -> {
-                        if(blockEntity.haveGhostLooking) {
-                            player.sendMessage(Text.of("[§a" + blockEntity.customName + "§r]:   " + MainClass.getStringTranslation("speech", "yiorite.warning.spectator")), false);
-                        }else {
-                            player.sendMessage(Text.of("[§a" + blockEntity.customName + "§r]:   " + MainClass.getStringTranslation("speech", "yiorite.warning")), false);
-                        }
+                        YioriteOreUtils.sendText(player, "warning" + (blockEntity.haveGhostLooking ? ".spectator" : ""), blockEntity.customName);
                     }
                     case 20 -> {
                         if (player.getInventory().armor.get(3).isOf(Blocks.CARVED_PUMPKIN.asItem())) player.sendMessage(Text.of("test pumpkin"), false);
@@ -108,7 +108,7 @@ public class YioriteOreBlockEntity extends BlockEntity {
                     default -> {
                         if (lastStaringTicks % 100 == 20) {
 
-                            player.sendMessage(Text.of("[§a" + blockEntity.customName + "§r]:   " + MainClass.getStringTranslation("speech", "yiorite.stealing")), false);
+                            YioriteOreUtils.sendText(player, "stealing", blockEntity.customName);
 
                             if(blockEntity.canAcceptItems()) {
 
@@ -140,11 +140,11 @@ public class YioriteOreBlockEntity extends BlockEntity {
                                 }
 
                                 if (missed) {
-                                    player.sendMessage(Text.of("[§a" + blockEntity.customName + "§r]:   " + MainClass.getStringTranslation("speech", "yiorite.missed")), false);
+                                    YioriteOreUtils.sendText(player, "missed", blockEntity.customName);
                                 }
 
                             }else {
-                                player.sendMessage(Text.of("[§a" + blockEntity.customName + "§r]:   " + MainClass.getStringTranslation("speech", "yiorite.full")), false);
+                                YioriteOreUtils.sendText(player, "full", blockEntity.customName);
                             }
 
                         }

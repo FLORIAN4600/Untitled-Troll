@@ -2,11 +2,11 @@ package fr.florian4600.untitledtroll;
 
 import fr.florian4600.untitledtroll.block.YioriteOreBlock;
 import fr.florian4600.untitledtroll.block.entity.YioriteOreBlockEntity;
+import fr.florian4600.untitledtroll.item.YioriteIngotItem;
 import fr.florian4600.untitledtroll.item.YioriteOreItemBlock;
 import fr.florian4600.untitledtroll.registry.UTFeaturesRegistry;
 import fr.florian4600.untitledtroll.state.propery.UTProperties;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.biome.v1.BiomeModification;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -14,13 +14,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.loot.LootTable;
-import net.minecraft.recipe.CampfireCookingRecipe;
-import net.minecraft.registry.Registerable;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.FoodComponent;
+import net.minecraft.item.ToolMaterials;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.tag.TagBuilder;
-import net.minecraft.resource.ResourceManager;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.MutableText;
@@ -29,8 +28,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.function.BiConsumer;
 
 public class MainClass implements ModInitializer {
 
@@ -47,10 +44,12 @@ public class MainClass implements ModInitializer {
 		LOGGER.info("Yummy");
 
 		Registry.register(Registries.BLOCK, newId("yiorite_ore"), YIORITE_ORE);
-		Registry.register(Registries.ITEM, newId("yiorite_ore"), new YioriteOreItemBlock(YIORITE_ORE, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+		Registry.register(Registries.ITEM, newId("yiorite_ore"), new YioriteOreItemBlock(YIORITE_ORE, new FabricItemSettings().fireproof().rarity(Rarity.RARE)));
 
 		Registry.register(Registries.BLOCK, newId("deepslate_yiorite_ore"), DEEPSLATE_YIORITE_ORE);
-		Registry.register(Registries.ITEM, newId("deepslate_yiorite_ore"), new YioriteOreItemBlock(DEEPSLATE_YIORITE_ORE, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+		Registry.register(Registries.ITEM, newId("deepslate_yiorite_ore"), new YioriteOreItemBlock(DEEPSLATE_YIORITE_ORE, new FabricItemSettings().fireproof().rarity(Rarity.RARE)));
+
+		Registry.register(Registries.ITEM, newId("yiorite_ingot"), new YioriteIngotItem(ToolMaterials.GOLD, 1, -0.2f,  new FabricItemSettings().fireproof().rarity(Rarity.EPIC).food(new FoodComponent.Builder().alwaysEdible().hunger(7).saturationModifier(1.8f).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 15, 3), 1.0F).statusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 25, 1), 0.3F).statusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 32, 2), 0.3F).build())));
 
 		UTFeaturesRegistry.register();
 	}

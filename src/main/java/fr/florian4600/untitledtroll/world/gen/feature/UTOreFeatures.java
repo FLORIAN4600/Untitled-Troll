@@ -3,7 +3,6 @@ package fr.florian4600.untitledtroll.world.gen.feature;
 import fr.florian4600.untitledtroll.MainClass;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
-import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryKey;

@@ -3,8 +3,6 @@ package fr.florian4600.untitledtroll.mixins;
 import fr.florian4600.untitledtroll.item.YioriteOreItemBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.command.CommandOutput;

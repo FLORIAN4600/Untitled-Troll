@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 123,
+  "experience": 0.15,
+  "group": "yiorite_ingot",
+  "ingredient": {
+    "item": "untitledtroll:deepslate_yiorite_ore"
+  },
+  "result": "untitledtroll:yiorite_ingot"
+}
