@@ -1,14 +1,10 @@
 package fr.florian4600.untitledtroll;
 
 import fr.florian4600.untitledtroll.block.UTBlocks;
-import fr.florian4600.untitledtroll.block.entity.YioriteOreBlockEntity;
+import fr.florian4600.untitledtroll.block.entity.UTBlockEntityTypes;
 import fr.florian4600.untitledtroll.item.UTItems;
 import fr.florian4600.untitledtroll.registry.UTFeaturesRegistry;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -20,12 +16,11 @@ public class MainClass implements ModInitializer {
 	public static final String MOD_ID = "untitledtroll";
 	public static final Logger LOGGER = LoggerFactory.getLogger("untitledtroll");
 
-	public static final BlockEntityType<YioriteOreBlockEntity> YIORITE_ORE_ENTITY_TYPE = Registry.register(Registries.BLOCK_ENTITY_TYPE, newId("yiorite_ore"), FabricBlockEntityTypeBuilder.create(YioriteOreBlockEntity::new, UTBlocks.YIORITE_ORE, UTBlocks.DEEPSLATE_YIORITE_ORE).build());
-
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Yummy");
 
+		UTBlockEntityTypes.register();
 		UTBlocks.register();
 		UTItems.register();
 		UTFeaturesRegistry.register();
