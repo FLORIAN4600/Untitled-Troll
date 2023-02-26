@@ -16,6 +16,8 @@ public class UTBlocks {
     public static final Block DEEPSLATE_YIORITE_ORE = new YioriteOreBlock(FabricBlockSettings.copyOf(YIORITE_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(6.3f, 46000f).sounds(BlockSoundGroup.DEEPSLATE));
     public static final Block TRAPPED_YIORITE_ORE = new Block(FabricBlockSettings.of(Material.METAL).luminance(3).strength(2.4f, 12000f));
 
+    public static final Block TRAPPED_DEEPSLATE_YIORITE_ORE = new Block(FabricBlockSettings.copyOf(TRAPPED_YIORITE_ORE).luminance(2));
+
     public UTBlocks() {
 
     }
@@ -24,6 +26,6 @@ public class UTBlocks {
         Registry.register(Registries.BLOCK, MainClass.newId("yiorite_ore"), YIORITE_ORE);
         Registry.register(Registries.BLOCK, MainClass.newId("deepslate_yiorite_ore"), DEEPSLATE_YIORITE_ORE);
         Registry.register(Registries.BLOCK, MainClass.newId("trapped_yiorite_ore"), TRAPPED_YIORITE_ORE);
-        Registry.register(Registries.BLOCK, MainClass.newId("deepslate_trapped_yiorite_ore"), TRAPPED_YIORITE_ORE);
+        Registry.register(Registries.BLOCK, MainClass.newId("deepslate_trapped_yiorite_ore"), DEEPSLATE_YIORITE_ORE);
     }
 }
