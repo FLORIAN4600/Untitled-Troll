@@ -2,6 +2,7 @@ package fr.florian4600.untitledtroll;
 
 import fr.florian4600.untitledtroll.block.UTBlocks;
 import fr.florian4600.untitledtroll.block.entity.UTBlockEntityTypes;
+import fr.florian4600.untitledtroll.item.UTItemGroups;
 import fr.florian4600.untitledtroll.item.UTItems;
 import fr.florian4600.untitledtroll.registry.UTFeaturesRegistry;
 import fr.florian4600.untitledtroll.stat.UTStats;
@@ -26,6 +27,7 @@ public class MainClass implements ModInitializer {
 		UTBlocks.register();
 		UTItems.register();
 		UTFeaturesRegistry.register();
+		UTItemGroups.register();
 	}
 
 	public static Identifier newId(String id) {
