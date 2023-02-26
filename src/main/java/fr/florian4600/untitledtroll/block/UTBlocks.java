@@ -25,7 +25,8 @@ public class UTBlocks {
     public static void register() {
         Registry.register(Registries.BLOCK, MainClass.newId("yiorite_ore"), YIORITE_ORE);
         Registry.register(Registries.BLOCK, MainClass.newId("deepslate_yiorite_ore"), DEEPSLATE_YIORITE_ORE);
+
         Registry.register(Registries.BLOCK, MainClass.newId("trapped_yiorite_ore"), TRAPPED_YIORITE_ORE);
-        Registry.register(Registries.BLOCK, MainClass.newId("deepslate_trapped_yiorite_ore"), TRAPPED_DEEPSLATE_YIORITE_ORE);
+        Registry.register(Registries.BLOCK, MainClass.newId("trapped_deepslate_yiorite_ore"), TRAPPED_DEEPSLATE_YIORITE_ORE);
     }
 }
