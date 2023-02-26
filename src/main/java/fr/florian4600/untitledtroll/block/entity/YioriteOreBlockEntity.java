@@ -1,6 +1,7 @@
 package fr.florian4600.untitledtroll.block.entity;
 
 import fr.florian4600.untitledtroll.block.YioriteOreBlock;
+import fr.florian4600.untitledtroll.stat.UTStats;
 import fr.florian4600.untitledtroll.utils.YioriteOreUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -47,6 +48,8 @@ public class YioriteOreBlockEntity extends BlockEntity {
         String playerUuid = player.getUuidAsString();
 
         if(targets.get(playerUuid) != null) return;
+
+        player.incrementStat(UTStats.YIORITE_LOOK_TIME);
 
         Integer nullStaringTicks = this.lastTargets.get(playerUuid);
         int lastStaringTicks = nullStaringTicks == null ? 0 : nullStaringTicks;

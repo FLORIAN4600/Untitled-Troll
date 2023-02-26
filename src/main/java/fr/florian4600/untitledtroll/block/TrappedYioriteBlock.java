@@ -1,15 +1,17 @@
 package fr.florian4600.untitledtroll.block;
 
 import fr.florian4600.untitledtroll.block.entity.TrappedYioriteOreBlockEntity;
+import fr.florian4600.untitledtroll.stat.UTStats;
 import fr.florian4600.untitledtroll.utils.YioriteOreUtils;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
@@ -17,7 +19,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class TrappedYioriteBlock extends BlockWithEntity {
+public class TrappedYioriteBlock extends LookableBlock {
 
     public static final VoxelShape SHAPE;
     public static final VoxelShape BOTTOM_SHAPE;
@@ -55,6 +57,14 @@ public class TrappedYioriteBlock extends BlockWithEntity {
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         if(world.isClient || placer == null || !placer.isPlayer() && world.getBlockEntity(pos) == null) return;
         YioriteOreUtils.sendText((PlayerEntity) placer, "trapped.placed", ((TrappedYioriteOreBlockEntity) world.getBlockEntity(pos)).getCustomName());
+    }
+
+    @Override
+    public void onLookedAt(World world, BlockState state, BlockHitResult hitResult, Entity entity) {
+        if(world.isClient || !entity.isPlayer()) return;
+        PlayerEntity player = (PlayerEntity) entity;
+        if(player.isCreative() || player.isSpectator()) return;
+        player.incrementStat(UTStats.YIORITE_LOOK_TIME);
     }
 
     static {
