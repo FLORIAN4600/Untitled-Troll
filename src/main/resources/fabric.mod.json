@@ -21,6 +21,9 @@
     "main": [
       "fr.florian4600.untitledtroll.MainClass"
     ],
+    "client": [
+      "fr.florian4600.untitledtroll.ClientSide"
+    ],
     "fabric-datagen": [
       "fr.florian4600.untitledtroll.data.UTDataGenEntryPoint"
     ]
