@@ -40,4 +40,4 @@ replay_*.log
 *.jfr
 
 #other
-src/main/generated/.cache/
+/src/main/generated/.cache/
