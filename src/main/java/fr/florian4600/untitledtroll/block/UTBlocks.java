@@ -14,9 +14,9 @@ import net.minecraft.state.property.Properties;
 public class UTBlocks {
     public static final Block YIORITE_ORE = new YioriteOreBlock(FabricBlockSettings.of(Material.STONE).dropsNothing().requiresTool().strength(4.3f, 36000f).ticksRandomly().luminance(blockState -> blockState.get(Properties.LIT) ? blockState.get(UTProperties.LIGHT_LEVEL) : 0));
     public static final Block DEEPSLATE_YIORITE_ORE = new YioriteOreBlock(FabricBlockSettings.copyOf(YIORITE_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(6.3f, 46000f).sounds(BlockSoundGroup.DEEPSLATE));
-    public static final Block TRAPPED_YIORITE_ORE = new Block(FabricBlockSettings.of(Material.METAL).luminance(3).strength(2.4f, 12000f));
+    public static final Block TRAPPED_YIORITE_ORE = new TrappedYioriteBlock(FabricBlockSettings.of(Material.METAL).luminance(3).strength(2.4f, 12000f).nonOpaque());
 
-    public static final Block TRAPPED_DEEPSLATE_YIORITE_ORE = new Block(FabricBlockSettings.copyOf(TRAPPED_YIORITE_ORE).luminance(2));
+    public static final Block TRAPPED_DEEPSLATE_YIORITE_ORE = new TrappedYioriteBlock(FabricBlockSettings.copyOf(TRAPPED_YIORITE_ORE).luminance(2));
 
     public UTBlocks() {
 
