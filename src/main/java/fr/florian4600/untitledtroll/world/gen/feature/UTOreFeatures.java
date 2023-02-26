@@ -1,6 +1,7 @@
 package fr.florian4600.untitledtroll.world.gen.feature;
 
 import fr.florian4600.untitledtroll.MainClass;
+import fr.florian4600.untitledtroll.block.UTBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.block.Block;
@@ -116,7 +117,7 @@ public class UTOreFeatures extends FabricDynamicRegistryProvider {
         RuleTest STONE_ORE_REPLACEABLES = new TagMatchRuleTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest DEEPSLATE_ORE_REPLACEABLES = new TagMatchRuleTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
 
-        List<OreFeatureConfig.Target> ORE_YIORITE_TARGETS = List.of(OreFeatureConfig.createTarget(STONE_ORE_REPLACEABLES, MainClass.YIORITE_ORE.getDefaultState()), OreFeatureConfig.createTarget(DEEPSLATE_ORE_REPLACEABLES, MainClass.YIORITE_ORE.getDefaultState()));
+        List<OreFeatureConfig.Target> ORE_YIORITE_TARGETS = List.of(OreFeatureConfig.createTarget(STONE_ORE_REPLACEABLES, UTBlocks.YIORITE_ORE.getDefaultState()), OreFeatureConfig.createTarget(DEEPSLATE_ORE_REPLACEABLES, UTBlocks.YIORITE_ORE.getDefaultState()));
 
         RegistryEntry<ConfiguredFeature<?,?>> ORE_YIORITE_CF = entries.add(ORE_YIORITE, oreCF(ORE_YIORITE_TARGETS, 4));
         RegistryEntry<ConfiguredFeature<?,?>> ORE_YIORITE_ECF = entries.add(ORE_YIORITE_E, oreCF(ORE_YIORITE_TARGETS, 9));

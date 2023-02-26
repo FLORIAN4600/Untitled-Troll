@@ -52,7 +52,7 @@ public class YioriteOreBlock extends LookableBlock {
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if(!world.isClient && world.getBlockEntity(pos) instanceof YioriteOreBlockEntity blockEntity && !(player.isCreative() && blockEntity.isEmpty())) {
-            ItemStack itemStack = new ItemStack(MainClass.YIORITE_ORE);
+            ItemStack itemStack = new ItemStack(UTBlocks.YIORITE_ORE);
             blockEntity.setStackNbt(itemStack);
             ItemEntity itemEntity = new ItemEntity(world, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, itemStack);
             itemEntity.setToDefaultPickupDelay();

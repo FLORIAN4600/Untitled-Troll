@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_bars"
+    },
+    "y": {
+      "item": "untitledtroll:deepslate_yiorite_ore"
+    }
+  },
+  "pattern": [
+    "III",
+    "IyI",
+    "iii"
+  ],
+  "result": {
+    "item": "untitledtroll:trapped_deepslate_yiorite_ore"
+  }
+}
