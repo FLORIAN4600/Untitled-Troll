@@ -1,6 +1,5 @@
 package fr.florian4600.untitledtroll.block.entity;
 
-import fr.florian4600.untitledtroll.MainClass;
 import fr.florian4600.untitledtroll.block.YioriteOreBlock;
 import fr.florian4600.untitledtroll.utils.YioriteOreUtils;
 import net.minecraft.block.BlockState;
@@ -30,7 +29,7 @@ public class YioriteOreBlockEntity extends BlockEntity {
     public boolean isLooked;
 
     public YioriteOreBlockEntity(BlockPos pos, BlockState state) {
-        super(MainClass.YIORITE_ORE_ENTITY_TYPE, pos, state);
+        super(UTBlockEntityTypes.YIORITE_ORE_ENTITY_TYPE, pos, state);
         this.inventory = DefaultedList.ofSize(48, ItemStack.EMPTY);
         this.customName = state.getBlock().getName().getString();
         this.targets = new HashMap<>();

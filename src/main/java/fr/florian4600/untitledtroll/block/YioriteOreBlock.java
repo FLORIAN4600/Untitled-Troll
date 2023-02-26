@@ -1,6 +1,6 @@
 package fr.florian4600.untitledtroll.block;
 
-import fr.florian4600.untitledtroll.MainClass;
+import fr.florian4600.untitledtroll.block.entity.UTBlockEntityTypes;
 import fr.florian4600.untitledtroll.block.entity.YioriteOreBlockEntity;
 import fr.florian4600.untitledtroll.state.propery.UTProperties;
 import net.minecraft.block.Block;
@@ -111,7 +111,7 @@ public class YioriteOreBlock extends LookableBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, MainClass.YIORITE_ORE_ENTITY_TYPE, (world.isClient ? YioriteOreBlockEntity::clientTick : YioriteOreBlockEntity::serverTick));
+        return checkType(type, UTBlockEntityTypes.YIORITE_ORE_ENTITY_TYPE, (world.isClient ? YioriteOreBlockEntity::clientTick : YioriteOreBlockEntity::serverTick));
     }
 
     private static void spawnParticles(World world, BlockPos pos, Vector3f color, Float size) {
