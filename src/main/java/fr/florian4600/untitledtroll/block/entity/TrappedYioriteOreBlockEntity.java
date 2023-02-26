@@ -27,4 +27,8 @@ public class TrappedYioriteOreBlockEntity extends BlockEntity {
         super.writeNbt(nbt);
         nbt.putString("CustomName", this.customName);
     }
+
+    public String getCustomName() {
+        return customName;
+    }
 }

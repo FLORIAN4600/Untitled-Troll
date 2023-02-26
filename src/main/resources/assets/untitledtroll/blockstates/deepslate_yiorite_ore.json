@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "untitledtroll:block/deepslate_yiorite_ore" }
+    "": {
+      "model": "untitledtroll:block/deepslate_yiorite_ore"
+    }
   }
 }

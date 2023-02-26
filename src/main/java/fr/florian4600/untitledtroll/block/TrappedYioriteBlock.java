@@ -50,8 +50,8 @@ public class TrappedYioriteBlock extends BlockWithEntity {
 
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        if(world.isClient || placer == null || !placer.isPlayer()) return;
-        YioriteOreUtils.sendText((PlayerEntity) placer, "trapped.placed", state.getBlock().getName());
+        if(world.isClient || placer == null || !placer.isPlayer() && world.getBlockEntity(pos) == null) return;
+        YioriteOreUtils.sendText((PlayerEntity) placer, "trapped.placed", ((TrappedYioriteOreBlockEntity) world.getBlockEntity(pos)).getCustomName());
     }
 
     static {

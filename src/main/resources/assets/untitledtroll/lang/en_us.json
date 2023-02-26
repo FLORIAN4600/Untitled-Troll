@@ -1,6 +1,8 @@
 {
   "block.untitledtroll.yiorite_ore": "Yiorite Ore",
   "block.untitledtroll.deepslate_yiorite_ore": "Deepslate Yiorite Ore",
+  "block.untitledtroll.trapped_yiorite_ore": "Trapped Yiorite Ore",
+  "block.untitledtroll.trapped_deepslate_yiorite_ore": "Trapped Deepslate Yiorite Ore",
   "item.untitledtroll.yiorite_ingot": "Yiorite Ingot",
   "death.itemattack.yiorite.0": "%1$s could not handle the melting toxicity of the %2$s",
   "death.itemattack.yiorite.0.player": "%1$s could not handle the melting toxicity of the %3$s",

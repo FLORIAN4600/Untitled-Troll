@@ -3,23 +3,31 @@ package fr.florian4600.untitledtroll.item;
 import fr.florian4600.untitledtroll.MainClass;
 import fr.florian4600.untitledtroll.block.UTBlocks;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.impl.itemgroup.FabricItemGroupBuilderImpl;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 
 public class UTItemGroups {
 
-    public static final ItemGroup UT_GROUP;
+    public static final ItemGroup UT_GROUP = FabricItemGroup.builder(MainClass.newId("ut_group")).displayName(MainClass.getTranslation("itemgroup", "ut_group")).icon(() -> new ItemStack(UTBlocks.DEEPSLATE_YIORITE_ORE)).build();
 
     public UTItemGroups() {
 
     }
 
-    static {
-        UT_GROUP = FabricItemGroup.builder(MainClass.newId("ut_group")).displayName(MainClass.getTranslation("itemgroup", "ut_group")).icon(() -> new ItemStack(UTBlocks.DEEPSLATE_YIORITE_ORE)).entries((enabledFeatures, entries, operatorEnabled) -> {
+    public static void register() {
+        ItemGroupEvents.modifyEntriesEvent(UT_GROUP).register(entries -> {
             entries.add(UTItems.YIORITE_ORE);
             entries.add(UTItems.DEEPSLATE_YIORITE_ORE);
+            entries.add(UTItems.TRAPPED_YIORITE_ORE);
+            entries.add(UTItems.TRAPPED_DEEPSLATE_YIORITE_ORE);
             entries.add(UTItems.YIORITE_INGOT);
-        }).build();
+        });
     }
 
 }

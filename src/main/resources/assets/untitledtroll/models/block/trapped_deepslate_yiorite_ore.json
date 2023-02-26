@@ -1,5 +1,5 @@
 {
-	"parent": "untitledtroll:template_trapped_block",
+	"parent": "untitledtroll:block/template_trapped_block",
 	"textures": {
 		"block": "untitledtroll:block/deepslate_yiorite_ore"
 	}
