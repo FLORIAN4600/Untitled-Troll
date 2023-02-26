@@ -4,6 +4,7 @@ import fr.florian4600.untitledtroll.block.UTBlocks;
 import fr.florian4600.untitledtroll.block.entity.UTBlockEntityTypes;
 import fr.florian4600.untitledtroll.item.UTItems;
 import fr.florian4600.untitledtroll.registry.UTFeaturesRegistry;
+import fr.florian4600.untitledtroll.stat.UTStats;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -20,6 +21,7 @@ public class MainClass implements ModInitializer {
 	public void onInitialize() {
 		LOGGER.info("Yummy");
 
+		UTStats.register();
 		UTBlockEntityTypes.register();
 		UTBlocks.register();
 		UTItems.register();
