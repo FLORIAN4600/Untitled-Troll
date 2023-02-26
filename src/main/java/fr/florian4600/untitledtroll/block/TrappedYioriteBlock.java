@@ -2,7 +2,10 @@ package fr.florian4600.untitledtroll.block;
 
 import fr.florian4600.untitledtroll.block.entity.TrappedYioriteOreBlockEntity;
 import fr.florian4600.untitledtroll.utils.YioriteOreUtils;
-import net.minecraft.block.*;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
