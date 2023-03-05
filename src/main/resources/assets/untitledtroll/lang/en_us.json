@@ -4,6 +4,7 @@
   "block.untitledtroll.trapped_yiorite_ore": "Trapped Yiorite Ore",
   "block.untitledtroll.trapped_deepslate_yiorite_ore": "Trapped Deepslate Yiorite Ore",
   "item.untitledtroll.yiorite_ingot": "Yiorite Ingot",
+  "item.untitledtroll.stinky_mud": "Stinky Mud...",
   "death.itemattack.yiorite.0": "%1$s could not handle the melting toxicity of the %2$s",
   "death.itemattack.yiorite.0.player": "%1$s could not handle the melting toxicity of the %3$s",
   "death.itemattack.yiorite.1": "%1$s was not brave enough to hold the enormous weight of %2$s's toxicity",
@@ -22,6 +23,9 @@
   "speech.untitledtroll.yiorite.full": "§4Buuuurp... I'm full",
   "speech.untitledtroll.yiorite.eplosion": "§cWhy is it so hott... Wait a min... YOU WILL NEVER GET ME LIKE THAT!! NOW, SAY GOODBYE...",
   "speech.untitledtroll.yiorite.trapped.placed": "§cNOOOOOOOOOOOO...  §3What have you done...?",
+  "speech.untitledtroll.yiorite.creative": "§7§o*You're not worthy enough*",
+  "speech.untitledtroll.yiorite.creative.switched": "§7§o*You're not worthy anymore*",
   "stat.untitledtroll.yiorite_look_time": "Time spended staring at Yiorite",
-  "itemgroup.untitledtroll.ut_group": "Untitled Troll Items"
+  "itemgroup.untitledtroll.ut_group": "Untitled Troll Items",
+  "container.untitledtroll.trapped_yiorite": "Trapped Yiorite"
 }
