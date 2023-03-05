@@ -12,31 +12,32 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.DustParticleEffect;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-import org.joml.Vector3f;
+import org.jetbrains.annotations.Nullable;
 
 public class YioriteOreBlock extends LookableBlock {
 
     public static final BooleanProperty LIT;
     public static final BooleanProperty LOOKED;
     public static final IntProperty LIGHT_LEVEL;
-    private static final float PARTICLE_SIZE = 1.0f;
-    private static final Vector3f PARTICLE_COLOR = new Vector3f(0.1f, 1f, 0.05f);
+    public static final IntProperty MUD_LEVEL;
 
     public YioriteOreBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(LIT, false));
+        this.setDefaultState(this.getDefaultState().with(LOOKED, false));
+        this.setDefaultState(this.getDefaultState().with(MUD_LEVEL, 0));
     }
 
     @Override
@@ -50,10 +51,24 @@ public class YioriteOreBlock extends LookableBlock {
     }
 
     @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        if(world.isClient()) return;
+        world.setBlockState(pos, state.with(MUD_LEVEL, (itemStack.getNbt() == null || !itemStack.getNbt().contains("MudLevel")) ? 0 : itemStack.getNbt().getInt("MudLevel")));
+        if (world.getBlockEntity(pos) instanceof YioriteOreBlockEntity blockEntity) {
+            blockEntity.setCustomName(itemStack.getName());
+        }
+    }
+
+    @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if(!world.isClient && world.getBlockEntity(pos) instanceof YioriteOreBlockEntity blockEntity && !(player.isCreative() && blockEntity.isEmpty())) {
-            ItemStack itemStack = new ItemStack(UTBlocks.YIORITE_ORE);
+            ItemStack itemStack = new ItemStack(state.getBlock());
+            if(itemStack.getNbt() == null) {
+                itemStack.setNbt(new NbtCompound());
+            }
             blockEntity.setStackNbt(itemStack);
+            itemStack.setCustomName(blockEntity.getCustomName());
+            itemStack.getNbt().putInt("MudLevel", state.get(MUD_LEVEL));
             ItemEntity itemEntity = new ItemEntity(world, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, itemStack);
             itemEntity.setToDefaultPickupDelay();
             world.spawnEntity(itemEntity);
@@ -74,14 +89,6 @@ public class YioriteOreBlock extends LookableBlock {
             world.setBlockState(pos, state.with(LIT, true), 3);
         }
 
-    }
-
-    public static void blockParticle(World world, BlockPos pos, int particleType) {
-        switch (particleType) {
-            case 1 -> spawnParticles(world, pos, new Vector3f(0.1f, 1f, 0.05f));
-            case 2 -> spawnParticles(world, pos, new Vector3f(0.12f, 0.12f, 0.12f), 0.4f);
-            default -> spawnParticles(world, pos);
-        }
     }
 
     public static void setLightLevel(BlockState state, World world, BlockPos pos, int level) {
@@ -114,45 +121,14 @@ public class YioriteOreBlock extends LookableBlock {
         return checkType(type, UTBlockEntityTypes.YIORITE_ORE_ENTITY_TYPE, (world.isClient ? YioriteOreBlockEntity::clientTick : YioriteOreBlockEntity::serverTick));
     }
 
-    private static void spawnParticles(World world, BlockPos pos, Vector3f color, Float size) {
-        double d = 0.5625;
-        Random random = world.random;
-        Direction[] directions = Direction.values();
-
-        for (Direction direction : directions) {
-            System.out.println("check");
-            BlockPos blockPos = pos.offset(direction);
-            if (!world.getBlockState(blockPos).isOpaqueFullCube(world, blockPos)) {
-                System.out.println("particles");
-                Direction.Axis axis = direction.getAxis();
-                double e = axis == Direction.Axis.X ? 0.5 + d * (double) direction.getOffsetX() : (double) random.nextFloat();
-                double f = axis == Direction.Axis.Y ? 0.5 + d * (double) direction.getOffsetY() : (double) random.nextFloat();
-                double g = axis == Direction.Axis.Z ? 0.5 + d * (double) direction.getOffsetZ() : (double) random.nextFloat();
-                world.addParticle(new DustParticleEffect(color, size), (double) pos.getX() + e, (double) pos.getY() + f, (double) pos.getZ() + g, 0.0, 0.0, 0.0);
-            }
-        }
-
-    }
-
-    private static void spawnParticles(World world, BlockPos pos, Vector3f color) {
-        spawnParticles(world, pos, color, PARTICLE_SIZE);
-    }
-
-    private static void spawnParticles(World world, BlockPos pos, Float size) {
-        spawnParticles(world, pos, PARTICLE_COLOR, size);
-    }
-
-    private static void spawnParticles(World world, BlockPos pos) {
-        spawnParticles(world, pos, PARTICLE_COLOR, PARTICLE_SIZE);
-    }
-
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(LIT, LOOKED, LIGHT_LEVEL);
+        builder.add(LIT, LOOKED, LIGHT_LEVEL, MUD_LEVEL);
     }
 
     static {
         LIT = RedstoneTorchBlock.LIT;
         LOOKED = UTProperties.LOOKED;
         LIGHT_LEVEL = UTProperties.LIGHT_LEVEL;
+        MUD_LEVEL = UTProperties.MUD_LEVEL;
     }
 }
