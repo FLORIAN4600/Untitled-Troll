@@ -64,7 +64,7 @@ public class UTOreFeatures extends FabricDynamicRegistryProvider {
         return new ConfiguredFeature<>(Feature.ORE, config);
     }
 
-    //TODO: Add real searchSize function option
+    //TODO: Remove this function
     private static EnvironmentScanPlacementModifier placementModifier(Direction direction, Block block, int maxSteps, int searchSize, int pauses, int random) {
         ArrayList<BlockPredicate> predicates = new ArrayList<>();
         Random random1 = new Random();
