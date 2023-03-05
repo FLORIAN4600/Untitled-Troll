@@ -65,6 +65,10 @@ loom {
 	}
 }
 
+tasks.withType(Copy).all {
+	duplicatesStrategy "exclude"
+}
+
 assemble.dependsOn runDatagen
 
 tasks.withType(JavaCompile).configureEach {
