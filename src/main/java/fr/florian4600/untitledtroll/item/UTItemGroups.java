@@ -17,10 +17,11 @@ public class UTItemGroups {
 
     public static void register() {
         ItemGroupEvents.modifyEntriesEvent(UT_GROUP).register(entries -> {
-            entries.add(UTItems.YIORITE_ORE);
-            entries.add(UTItems.DEEPSLATE_YIORITE_ORE);
             entries.add(UTItems.TRAPPED_YIORITE_ORE);
             entries.add(UTItems.TRAPPED_DEEPSLATE_YIORITE_ORE);
+            entries.add(UTItems.YIORITE_ORE);
+            entries.add(UTItems.DEEPSLATE_YIORITE_ORE);
+            entries.add(UTItems.STINKY_MUD);
             entries.add(UTItems.YIORITE_INGOT);
         });
     }
