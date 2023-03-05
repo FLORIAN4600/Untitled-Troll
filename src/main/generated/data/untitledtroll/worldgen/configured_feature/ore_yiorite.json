@@ -10,7 +10,8 @@
           "Properties": {
             "light_level": "0",
             "lit": "false",
-            "looked": "true"
+            "looked": "false",
+            "mud_level": "0"
           }
         },
         "target": {
@@ -24,7 +25,8 @@
           "Properties": {
             "light_level": "0",
             "lit": "false",
-            "looked": "true"
+            "looked": "false",
+            "mud_level": "0"
           }
         },
         "target": {

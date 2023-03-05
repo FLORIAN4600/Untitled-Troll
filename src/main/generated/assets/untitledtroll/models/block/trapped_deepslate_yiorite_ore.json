@@ -1,0 +1,6 @@
+{
+  "parent": "untitledtroll:block/template_trapped_block_all",
+  "textures": {
+    "all": "untitledtroll:block/deepslate_yiorite_ore"
+  }
+}

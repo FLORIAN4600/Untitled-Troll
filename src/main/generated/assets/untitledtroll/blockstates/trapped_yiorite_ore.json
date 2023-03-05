@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "mud_level=0": {
+      "model": "untitledtroll:block/trapped_yiorite_ore"
+    },
+    "mud_level=1": {
+      "model": "untitledtroll:block/trapped_yiorite_ore_mud01"
+    },
+    "mud_level=2": {
+      "model": "untitledtroll:block/trapped_yiorite_ore_mud02"
+    },
+    "mud_level=3": {
+      "model": "untitledtroll:block/trapped_yiorite_ore_mud03"
+    }
+  }
+}

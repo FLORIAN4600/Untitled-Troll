@@ -1,6 +1,0 @@
-{
-	"parent": "untitledtroll:block/template_trapped_block",
-	"textures": {
-		"block": "untitledtroll:block/yiorite_ore"
-	}
-}

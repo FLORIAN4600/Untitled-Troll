@@ -1,0 +1,12 @@
+{
+  "parent": "untitledtroll:block/template_trapped_block",
+  "textures": {
+    "particle": "#all",
+    "block_down": "#all",
+    "block_up": "#all",
+    "block_north": "#all",
+    "block_east": "#all",
+    "block_south": "#all",
+    "block_west": "#all"
+  }
+}
