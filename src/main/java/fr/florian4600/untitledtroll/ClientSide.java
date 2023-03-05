@@ -9,6 +9,6 @@ public class ClientSide implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), UTBlocks.TRAPPED_YIORITE_ORE, UTBlocks.TRAPPED_DEEPSLATE_YIORITE_ORE);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), UTBlocks.TRAPPED_YIORITE_ORE, UTBlocks.TRAPPED_DEEPSLATE_YIORITE_ORE);
     }
 }
