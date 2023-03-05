@@ -1,5 +1,6 @@
 package fr.florian4600.untitledtroll.data;
 
+import fr.florian4600.untitledtroll.data.client.UTModelProvider;
 import fr.florian4600.untitledtroll.world.gen.feature.UTOreFeatures;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -14,6 +15,7 @@ public class UTDataGenEntryPoint implements DataGeneratorEntrypoint {
         FabricDataGenerator.Pack registryPack = fabricDataGenerator.createPack();
 
         registryPack.addProvider(UTOreFeatures::new);
+        registryPack.addProvider(UTModelProvider::new);
     }
 
     @Override
