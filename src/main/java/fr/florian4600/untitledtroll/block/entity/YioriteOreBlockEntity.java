@@ -2,6 +2,7 @@ package fr.florian4600.untitledtroll.block.entity;
 
 import fr.florian4600.untitledtroll.block.YioriteOreBlock;
 import fr.florian4600.untitledtroll.stat.UTStats;
+import fr.florian4600.untitledtroll.state.propery.UTProperties;
 import fr.florian4600.untitledtroll.utils.YioriteOreUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -11,7 +12,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.hit.BlockHitResult;
@@ -23,7 +23,7 @@ import java.util.*;
 public class YioriteOreBlockEntity extends BlockEntity {
 
     private DefaultedList<ItemStack> inventory;
-    private String customName;
+    private Text customName;
     private Boolean haveGhostLooking;
     private HashMap<String, Integer> lastTargets;
     private HashMap<String, Integer> targets;
@@ -32,8 +32,8 @@ public class YioriteOreBlockEntity extends BlockEntity {
 
     public YioriteOreBlockEntity(BlockPos pos, BlockState state) {
         super(UTBlockEntityTypes.YIORITE_ORE_ENTITY_TYPE, pos, state);
-        this.inventory = DefaultedList.ofSize(48, ItemStack.EMPTY);
-        this.customName = state.getBlock().getName().getString();
+        this.inventory = DefaultedList.ofSize(45, ItemStack.EMPTY);
+        this.customName = state.getBlock().getName();
         this.targets = new HashMap<>();
         this.lastTargets = new HashMap<>();
         this.haveGhostLooking = false;
@@ -64,7 +64,7 @@ public class YioriteOreBlockEntity extends BlockEntity {
         super.readNbt(nbt);
         Inventories.readNbt(nbt, inventory);
         if (nbt.contains("CustomName", 8)) {
-            this.customName = nbt.getString("CustomName");
+            this.customName = Text.Serializer.fromJson(nbt.getString("CustomName"));
         }
     }
 
@@ -72,19 +72,35 @@ public class YioriteOreBlockEntity extends BlockEntity {
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
-        nbt.putString("CustomName", this.customName);
+        nbt.putString("CustomName", Text.Serializer.toJson(this.customName));
+    }
+
+    public Text getCustomName() {
+        return this.customName;
+    }
+
+    public void setCustomName(Text customName) {
+        this.customName = customName;
     }
 
     public static void clientTick(World world, BlockPos pos, BlockState state, YioriteOreBlockEntity blockEntity) {
 
-        if(blockEntity.ticksSinceLooked % 20 == 1) {
-            YioriteOreBlock.blockParticle(world, pos, 1);
-        }
+        if(state.contains(UTProperties.LOOKED) && state.get(UTProperties.LOOKED)) {
+            blockEntity.isLooked = true;
+            blockEntity.ticksSinceLooked += 1;
 
-        if(blockEntity.ticksSinceLooked % 10 == 1) {
-            YioriteOreBlock.blockParticle(world, pos, 2);
-        }
+            if(blockEntity.ticksSinceLooked % 20 == 1) {
+                YioriteOreUtils.spawnParticles(world, pos, 1);
+            }
 
+            if(blockEntity.ticksSinceLooked % 10 == 1) {
+                YioriteOreUtils.spawnParticles(world, pos, 2);
+            }
+
+        }else if(blockEntity.ticksSinceLooked != 0) {
+            blockEntity.isLooked = false;
+            blockEntity.ticksSinceLooked = 0;
+        }
     }
 
     public static void serverTick(World world, BlockPos pos, BlockState state, YioriteOreBlockEntity blockEntity) {
