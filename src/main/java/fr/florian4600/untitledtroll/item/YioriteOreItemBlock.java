@@ -3,6 +3,7 @@ package fr.florian4600.untitledtroll.item;
 import com.google.common.collect.Iterables;
 import fr.florian4600.untitledtroll.MainClass;
 import fr.florian4600.untitledtroll.entity.damage.UTItemDamageSource;
+import fr.florian4600.untitledtroll.utils.YioriteOreUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -34,11 +35,19 @@ public class YioriteOreItemBlock extends BlockItem {
         String lastInvUUID = stack.getNbt().getString("lastUser");
         int tickSincePickedUp = (stack.getNbt().contains("InventoryTicks") && lastInvUUID == entity.getUuidAsString()) ? stack.getNbt().getInt("InventoryTicks") : 0;
 
+        if(entity instanceof PlayerEntity player && player.isCreative()) {
+            if(tickSincePickedUp > 0) {
+                YioriteOreUtils.sendText(player, "creative.switched", stack.getName());
+            }else {
+                YioriteOreUtils.sendText(player, "creative", stack.getName());
+            }
+            player.getInventory().setStack(slot, ItemStack.EMPTY);
+            return;
+        }
+
         if(tickSincePickedUp >= 200) {
             if(entity.isPlayer()) {
                 PlayerEntity player = (PlayerEntity) entity;
-
-                if(player.isCreative()) return;
 
                 player.sendMessage(Text.of("[§a" + stack.getName().getString() + "§r]:   " + MainClass.getStringTranslation("speech", "yiorite.item")), false);
 
