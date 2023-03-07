@@ -22,7 +22,6 @@ public class StinkyMudItem extends Item {
         if(context.getPlayer() == null || (!context.getPlayer().isCreative() && context.getStack().getCount() < 16) || !context.getPlayer().isSneaking()) return ActionResult.PASS;
         BlockState state = context.getWorld().getBlockState(context.getBlockPos());
         if(state.contains(UTProperties.MUD_LEVEL) && UTProperties.MUD_LEVEL.getValues().contains(state.get(UTProperties.MUD_LEVEL)+1)) {
-            System.out.println("updating block state from mud_level="+state.get(UTProperties.MUD_LEVEL)+" to mud_level="+(state.get(UTProperties.MUD_LEVEL)+1));
             context.getWorld().setBlockState(context.getBlockPos(), state.with(UTProperties.MUD_LEVEL, state.get(UTProperties.MUD_LEVEL)+1));
             if(!context.getWorld().isClient()) {
                 context.getStack().setCount(context.getStack().getCount()-16);
