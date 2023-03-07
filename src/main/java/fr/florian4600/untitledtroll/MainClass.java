@@ -4,6 +4,7 @@ import fr.florian4600.untitledtroll.block.UTBlocks;
 import fr.florian4600.untitledtroll.block.entity.UTBlockEntityTypes;
 import fr.florian4600.untitledtroll.item.UTItemGroups;
 import fr.florian4600.untitledtroll.item.UTItems;
+import fr.florian4600.untitledtroll.recipe.UTRecipes;
 import fr.florian4600.untitledtroll.registry.UTFeaturesRegistry;
 import fr.florian4600.untitledtroll.stat.UTStats;
 import net.fabricmc.api.ModInitializer;
@@ -27,6 +28,7 @@ public class MainClass implements ModInitializer {
 		UTBlocks.register();
 		UTItems.register();
 		UTFeaturesRegistry.register();
+		UTRecipes.register();
 		UTItemGroups.register();
 	}
 

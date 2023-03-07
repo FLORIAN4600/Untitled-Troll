@@ -1,0 +1,9 @@
+{
+  "type": "untitledtroll:block_trapping",
+  "category": "misc",
+  "surrounding": "minecraft:iron_bars",
+  "trappedversion": {
+    "untitledtroll:yiorite_ore": "untitledtroll:trapped_yiorite_ore",
+    "untitledtroll:deepslate_yiorite_ore": "untitledtroll:trapped_deepslate_yiorite_ore"
+  }
+}
