@@ -118,9 +118,7 @@ public class YioriteOreBlockEntity extends BlockEntity {
                 int lastStaringTicks = target.getValue();
 
                 switch (lastStaringTicks) {
-                    case 15 -> {
-                        YioriteOreUtils.sendText(player, "warning" + (blockEntity.haveGhostLooking ? ".spectator" : ""), blockEntity.customName);
-                    }
+                    case 15 -> YioriteOreUtils.sendText(player, "warning" + (blockEntity.haveGhostLooking ? ".spectator" : ""), blockEntity.customName);
                     case 20 -> {
                         if (player.getInventory().armor.get(3).isOf(Blocks.CARVED_PUMPKIN.asItem())) player.sendMessage(Text.of("test pumpkin"), false);
                     }
