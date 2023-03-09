@@ -88,6 +88,7 @@ public class YioriteOreBlockEntity extends BlockEntity {
     }
 
     public void setMudded() {
+        System.out.println("setMudded");
         this.mudded = true;
         this.ticksSinceLooked = 0;
         this.isLooked = false;
@@ -96,11 +97,6 @@ public class YioriteOreBlockEntity extends BlockEntity {
     public static void clientTick(World world, BlockPos pos, BlockState state, YioriteOreBlockEntity blockEntity) {
 
         if(blockEntity.mudded) return;
-
-        if(state.get(UTProperties.MUD_LEVEL) == 3) {
-            blockEntity.mudded = true;
-            return;
-        }
 
         if(state.contains(UTProperties.LOOKED) && state.get(UTProperties.LOOKED)) {
             blockEntity.isLooked = true;

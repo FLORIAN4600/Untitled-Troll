@@ -27,6 +27,7 @@ public class StinkyMudItem extends Item {
         BlockState state = context.getWorld().getBlockState(context.getBlockPos());
         if(state.contains(UTProperties.MUD_LEVEL) && UTProperties.MUD_LEVEL.getValues().contains(state.get(UTProperties.MUD_LEVEL)+1)) {
             context.getWorld().setBlockState(context.getBlockPos(), state.with(UTProperties.MUD_LEVEL, state.get(UTProperties.MUD_LEVEL)+1));
+            state = context.getWorld().getBlockState(context.getBlockPos());
             if(!context.getWorld().isClient()) {
                 if(state.get(UTProperties.MUD_LEVEL) == 3) {
                     if(context.getWorld().getBlockEntity(context.getBlockPos()) instanceof TrappedYioriteOreBlockEntity blockEntity) {
@@ -37,6 +38,8 @@ public class StinkyMudItem extends Item {
                     }
                 }
                 context.getStack().setCount(context.getStack().getCount()-16);
+            }else if(state.get(UTProperties.MUD_LEVEL) == 3 && context.getWorld().getBlockEntity(context.getBlockPos()) instanceof YioriteOreBlockEntity blockEntity) {
+                blockEntity.setMudded();
             }
             return ActionResult.SUCCESS;
         }
