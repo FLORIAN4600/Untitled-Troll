@@ -29,6 +29,7 @@ public class YioriteOreBlockEntity extends BlockEntity {
     private HashMap<String, Integer> targets;
     public int ticksSinceLooked;
     public boolean isLooked;
+    private boolean mudded;
 
     public YioriteOreBlockEntity(BlockPos pos, BlockState state) {
         super(UTBlockEntityTypes.YIORITE_ORE_ENTITY_TYPE, pos, state);
@@ -37,9 +38,12 @@ public class YioriteOreBlockEntity extends BlockEntity {
         this.targets = new HashMap<>();
         this.lastTargets = new HashMap<>();
         this.haveGhostLooking = false;
+        this.mudded = false;
     }
 
     public void onLookedAt(World world, BlockState state, BlockHitResult hitResult, PlayerEntity player) {
+
+        if(mudded) return;
 
         if(player.isSpectator()) {
             this.haveGhostLooking = true;
@@ -83,9 +87,17 @@ public class YioriteOreBlockEntity extends BlockEntity {
         this.customName = customName;
     }
 
+    public void setMudded(int mudded) {
+        if(mudded == 3) {
+            this.mudded = true;
+            this.ticksSinceLooked = 0;
+            this.isLooked = false;
+        }
+    }
+
     public static void clientTick(World world, BlockPos pos, BlockState state, YioriteOreBlockEntity blockEntity) {
 
-        if(state.contains(UTProperties.LOOKED) && state.get(UTProperties.LOOKED)) {
+        if(state.contains(UTProperties.LOOKED) && state.get(UTProperties.LOOKED) && blockEntity.mudded) {
             blockEntity.isLooked = true;
             blockEntity.ticksSinceLooked += 1;
 
@@ -104,6 +116,8 @@ public class YioriteOreBlockEntity extends BlockEntity {
     }
 
     public static void serverTick(World world, BlockPos pos, BlockState state, YioriteOreBlockEntity blockEntity) {
+
+        if(blockEntity.mudded) return;
 
         blockEntity.isLooked = !blockEntity.targets.isEmpty();
 

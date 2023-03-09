@@ -83,7 +83,7 @@ public class TrappedYioriteBlock extends LookableBlock {
         if (world.getBlockEntity(pos) instanceof TrappedYioriteOreBlockEntity blockEntity) {
             blockEntity.setCustomName(itemStack.getName());
             if(placer == null || !placer.isPlayer()) return;
-            YioriteOreUtils.sendText((PlayerEntity) placer, "trapped.placed", blockEntity.getCustomName());
+            YioriteOreUtils.sendTrappedText((PlayerEntity) placer, "placed", blockEntity.getCustomName());
         }
     }
 
@@ -94,7 +94,7 @@ public class TrappedYioriteBlock extends LookableBlock {
         if(player.isCreative() || player.isSpectator()) return;
         player.incrementStat(UTStats.YIORITE_LOOK_TIME);
         if(world.getBlockEntity(hitResult.getBlockPos()) instanceof TrappedYioriteOreBlockEntity blockEntity) {
-            blockEntity.setMaxLookingDistance(hitResult.getBlockPos().getManhattanDistance(entity.getBlockPos())*1.33f);
+            blockEntity.setMaxLookingDistance(hitResult.getBlockPos().getManhattanDistance(entity.getBlockPos())*1.33f/(state.contains(UTProperties.MUD_LEVEL) ? state.get(UTProperties.MUD_LEVEL) : 1));
         }
     }
 

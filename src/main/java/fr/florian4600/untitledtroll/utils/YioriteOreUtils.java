@@ -20,6 +20,10 @@ public class YioriteOreUtils {
 
     }
 
+    public static void sendTrappedText(PlayerEntity player, String id, Text name) {
+        player.sendMessage(Text.of("[§a" + (name == null ? Text.of(defaultName) : name.getString()) + "§r]:   " + MainClass.getStringTranslation("speech", "trapped_yiorite."+id)));
+    }
+
     public static void sendText(PlayerEntity player, String id, Text name) {
         player.sendMessage(Text.of("[§a" + (name == null ? Text.of(defaultName) : name.getString()) + "§r]:   " + MainClass.getStringTranslation("speech", "yiorite."+id)));
     }

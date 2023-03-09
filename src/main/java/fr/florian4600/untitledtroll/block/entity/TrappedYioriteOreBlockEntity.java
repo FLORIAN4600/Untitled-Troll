@@ -1,6 +1,8 @@
 package fr.florian4600.untitledtroll.block.entity;
 
 import fr.florian4600.untitledtroll.MainClass;
+import fr.florian4600.untitledtroll.state.propery.UTProperties;
+import fr.florian4600.untitledtroll.utils.YioriteOreUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerInventory;

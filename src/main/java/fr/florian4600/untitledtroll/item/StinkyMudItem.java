@@ -1,6 +1,10 @@
 package fr.florian4600.untitledtroll.item;
 
+import fr.florian4600.untitledtroll.block.TrappedYioriteBlock;
+import fr.florian4600.untitledtroll.block.entity.TrappedYioriteOreBlockEntity;
+import fr.florian4600.untitledtroll.block.entity.YioriteOreBlockEntity;
 import fr.florian4600.untitledtroll.state.propery.UTProperties;
+import fr.florian4600.untitledtroll.utils.YioriteOreUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -23,6 +27,14 @@ public class StinkyMudItem extends Item {
         BlockState state = context.getWorld().getBlockState(context.getBlockPos());
         if(state.contains(UTProperties.MUD_LEVEL) && UTProperties.MUD_LEVEL.getValues().contains(state.get(UTProperties.MUD_LEVEL)+1)) {
             context.getWorld().setBlockState(context.getBlockPos(), state.with(UTProperties.MUD_LEVEL, state.get(UTProperties.MUD_LEVEL)+1));
+            if(state.get(UTProperties.MUD_LEVEL) == 3) {
+                if(context.getWorld().getBlockEntity(context.getBlockPos()) instanceof TrappedYioriteOreBlockEntity blockEntity) {
+                    YioriteOreUtils.sendTrappedText(context.getPlayer(), "mud03", blockEntity.getCustomName());
+                }else if(context.getWorld().getBlockEntity(context.getBlockPos()) instanceof YioriteOreBlockEntity blockEntity) {
+                    blockEntity.setMudded(3);
+                    YioriteOreUtils.sendText(context.getPlayer(), "mud03", blockEntity.getCustomName());
+                }
+            }
             if(!context.getWorld().isClient()) {
                 context.getStack().setCount(context.getStack().getCount()-16);
             }
