@@ -87,17 +87,22 @@ public class YioriteOreBlockEntity extends BlockEntity {
         this.customName = customName;
     }
 
-    public void setMudded(int mudded) {
-        if(mudded == 3) {
-            this.mudded = true;
-            this.ticksSinceLooked = 0;
-            this.isLooked = false;
-        }
+    public void setMudded() {
+        this.mudded = true;
+        this.ticksSinceLooked = 0;
+        this.isLooked = false;
     }
 
     public static void clientTick(World world, BlockPos pos, BlockState state, YioriteOreBlockEntity blockEntity) {
 
-        if(state.contains(UTProperties.LOOKED) && state.get(UTProperties.LOOKED) && blockEntity.mudded) {
+        if(blockEntity.mudded) return;
+
+        if(state.get(UTProperties.MUD_LEVEL) == 3) {
+            blockEntity.mudded = true;
+            return;
+        }
+
+        if(state.contains(UTProperties.LOOKED) && state.get(UTProperties.LOOKED)) {
             blockEntity.isLooked = true;
             blockEntity.ticksSinceLooked += 1;
 

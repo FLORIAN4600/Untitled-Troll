@@ -27,15 +27,15 @@ public class StinkyMudItem extends Item {
         BlockState state = context.getWorld().getBlockState(context.getBlockPos());
         if(state.contains(UTProperties.MUD_LEVEL) && UTProperties.MUD_LEVEL.getValues().contains(state.get(UTProperties.MUD_LEVEL)+1)) {
             context.getWorld().setBlockState(context.getBlockPos(), state.with(UTProperties.MUD_LEVEL, state.get(UTProperties.MUD_LEVEL)+1));
-            if(state.get(UTProperties.MUD_LEVEL) == 3) {
-                if(context.getWorld().getBlockEntity(context.getBlockPos()) instanceof TrappedYioriteOreBlockEntity blockEntity) {
-                    YioriteOreUtils.sendTrappedText(context.getPlayer(), "mud03", blockEntity.getCustomName());
-                }else if(context.getWorld().getBlockEntity(context.getBlockPos()) instanceof YioriteOreBlockEntity blockEntity) {
-                    blockEntity.setMudded(3);
-                    YioriteOreUtils.sendText(context.getPlayer(), "mud03", blockEntity.getCustomName());
-                }
-            }
             if(!context.getWorld().isClient()) {
+                if(state.get(UTProperties.MUD_LEVEL) == 3) {
+                    if(context.getWorld().getBlockEntity(context.getBlockPos()) instanceof TrappedYioriteOreBlockEntity blockEntity) {
+                        YioriteOreUtils.sendTrappedText(context.getPlayer(), "mud03", blockEntity.getCustomName());
+                    }else if(context.getWorld().getBlockEntity(context.getBlockPos()) instanceof YioriteOreBlockEntity blockEntity) {
+                        blockEntity.setMudded();
+                        YioriteOreUtils.sendText(context.getPlayer(), "mud03", blockEntity.getCustomName());
+                    }
+                }
                 context.getStack().setCount(context.getStack().getCount()-16);
             }
             return ActionResult.SUCCESS;
