@@ -39,6 +39,7 @@ public class TrappedYioriteBlock extends LookableBlock {
     public static final VoxelShape OUTLINE_SHAPE;
 
     public static final IntProperty MUD_LEVEL;
+    public static final IntProperty COMPARATOR_OUT;
 
     public TrappedYioriteBlock(Settings settings) {
         super(settings);
@@ -93,8 +94,10 @@ public class TrappedYioriteBlock extends LookableBlock {
         PlayerEntity player = (PlayerEntity) entity;
         if(player.isCreative() || player.isSpectator()) return;
         player.incrementStat(UTStats.YIORITE_LOOK_TIME);
-        if(world.getBlockEntity(hitResult.getBlockPos()) instanceof TrappedYioriteOreBlockEntity blockEntity) {
-            blockEntity.setMaxLookingDistance(hitResult.getBlockPos().getManhattanDistance(entity.getBlockPos())*1.33f/(state.contains(UTProperties.MUD_LEVEL) ? state.get(UTProperties.MUD_LEVEL) : 1));
+        if(!state.contains(UTProperties.COMPARATOR_OUT)) return;
+        int comparatorLevel = Math.round((25f-Math.min(hitResult.getBlockPos().getManhattanDistance(entity.getBlockPos()), 25f))*0.56f/(state.contains(UTProperties.MUD_LEVEL) && state.get(UTProperties.MUD_LEVEL) > 0 ? (float) state.get(UTProperties.MUD_LEVEL)+1f : 1f));
+        if(state.get(UTProperties.COMPARATOR_OUT) < comparatorLevel) {
+            world.setBlockState(hitResult.getBlockPos(), state.with(UTProperties.COMPARATOR_OUT, comparatorLevel));
         }
     }
 
@@ -130,14 +133,18 @@ public class TrappedYioriteBlock extends LookableBlock {
     @SuppressWarnings("deprecated")
     @Override
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if(blockEntity == null) return 0;
-        return ((TrappedYioriteOreBlockEntity) blockEntity).getComparatorOutput((TrappedYioriteOreBlockEntity) blockEntity);
+        System.out.println("comparator update");
+        if(state.contains(UTProperties.COMPARATOR_OUT)) {
+            System.out.println(state.get(UTProperties.COMPARATOR_OUT));
+            return state.get(UTProperties.COMPARATOR_OUT);
+        }
+        System.out.println(0);
+        return 0;
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(MUD_LEVEL);
+        builder.add(MUD_LEVEL, COMPARATOR_OUT);
     }
 
     static {
@@ -148,5 +155,6 @@ public class TrappedYioriteBlock extends LookableBlock {
         OUTLINE_SHAPE = VoxelShapes.union(BOTTOM_SHAPE, BARS_SHAPE, TOP_SHAPE);
 
         MUD_LEVEL = UTProperties.MUD_LEVEL;
+        COMPARATOR_OUT = UTProperties.COMPARATOR_OUT;
     }
 }

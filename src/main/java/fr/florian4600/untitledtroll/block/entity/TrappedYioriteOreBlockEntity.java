@@ -2,7 +2,6 @@ package fr.florian4600.untitledtroll.block.entity;
 
 import fr.florian4600.untitledtroll.MainClass;
 import fr.florian4600.untitledtroll.state.propery.UTProperties;
-import fr.florian4600.untitledtroll.utils.YioriteOreUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -20,12 +19,11 @@ import net.minecraft.world.World;
 public class TrappedYioriteOreBlockEntity extends LootableContainerBlockEntity {
 
     private DefaultedList<ItemStack> inventory;
-    public float maxLookingDistance;
+    private int tickCount;
 
     public TrappedYioriteOreBlockEntity(BlockPos pos, BlockState state) {
         super(UTBlockEntityTypes.TRAPPED_YIORITE_ORE_ENTITY_TYPE, pos, state);
         this.inventory = DefaultedList.ofSize(45, ItemStack.EMPTY);
-        this.maxLookingDistance = -1f;
     }
 
     @Override
@@ -41,19 +39,11 @@ public class TrappedYioriteOreBlockEntity extends LootableContainerBlockEntity {
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, TrappedYioriteOreBlockEntity blockEntity) {
-        blockEntity.setMaxLookingDistance(-1f);
-    }
-
-    public float getMaxLookingDistance() {
-        return maxLookingDistance;
-    }
-
-    public void setMaxLookingDistance(float maxLookingDistance) {
-        this.maxLookingDistance = maxLookingDistance;
-    }
-
-    public int getComparatorOutput(TrappedYioriteOreBlockEntity blockEntity) {
-        return Math.round((Math.min(blockEntity.getMaxLookingDistance(), 32f)-32f)*0.4375f);
+        if(blockEntity.tickCount % 5 == 4 && state.contains(UTProperties.COMPARATOR_OUT) && state.get(UTProperties.COMPARATOR_OUT) > 0) {
+            world.setBlockState(pos, state.with(UTProperties.COMPARATOR_OUT, 0));
+            blockEntity.tickCount = 0;
+        }
+        blockEntity.tickCount++;
     }
 
     @Override
