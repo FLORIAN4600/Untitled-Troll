@@ -95,7 +95,8 @@ public class TrappedYioriteBlock extends LookableBlock {
         if(player.isCreative() || player.isSpectator()) return;
         player.incrementStat(UTStats.YIORITE_LOOK_TIME);
         if(!state.contains(UTProperties.COMPARATOR_OUT)) return;
-        int comparatorLevel = Math.round((25f-Math.min(hitResult.getBlockPos().getManhattanDistance(entity.getBlockPos()), 25f))*0.56f/(state.contains(UTProperties.MUD_LEVEL) && state.get(UTProperties.MUD_LEVEL) > 0 ? (float) state.get(UTProperties.MUD_LEVEL)+1f : 1f));
+        float mudLevel = (state.contains(UTProperties.MUD_LEVEL) && state.get(UTProperties.MUD_LEVEL) > 0 ? (float) state.get(UTProperties.MUD_LEVEL)*0.5f+1f : 1f);
+        int comparatorLevel = Math.round((25f/mudLevel-Math.min(hitResult.getBlockPos().getManhattanDistance(entity.getBlockPos()), 25f/mudLevel))*0.56f);
         if(state.get(UTProperties.COMPARATOR_OUT) < comparatorLevel) {
             world.setBlockState(hitResult.getBlockPos(), state.with(UTProperties.COMPARATOR_OUT, comparatorLevel));
         }
