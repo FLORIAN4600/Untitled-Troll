@@ -1,6 +1,5 @@
 package fr.florian4600.untitledtroll.item;
 
-import fr.florian4600.untitledtroll.block.TrappedYioriteBlock;
 import fr.florian4600.untitledtroll.block.entity.TrappedYioriteOreBlockEntity;
 import fr.florian4600.untitledtroll.block.entity.YioriteOreBlockEntity;
 import fr.florian4600.untitledtroll.state.propery.UTProperties;
