@@ -2,7 +2,6 @@ package fr.florian4600.untitledtroll.state.propery;
 
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.state.property.Properties;
 
 public class UTProperties {
     public static final BooleanProperty LOOKED;
